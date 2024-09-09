@@ -1,0 +1,7 @@
+# Ignore built files
+/node_modules
+/.next
+/out
+
+# Ignore any other files or folders
+public/
