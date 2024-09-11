@@ -6,9 +6,9 @@ import Link from 'next/link';
 
 type Props = {};
 
-const Footer = (props: Props) => {
+const AppFooter = (props: Props) => {
   return (
-    <footer className="bg-gray-800 w-full text-white p-5 shadow-md">
+    <footer className="bg-zinc-950 w-full text-white p-5 shadow-md">
       <div className="lg:w-4/5 w-full m-auto">
         <div className="w-full flex flex-wrap">
           <div className="lg:w-1/3 sm:w-3/5 w-full p-2">
@@ -40,8 +40,8 @@ const Footer = (props: Props) => {
           <div className="lg:w-1/3 w-full  p-2">
             <h3 className="text-xl px-1 py-3 font-bold">Subscribe to receive our latest update</h3>
             <div className="flex gap-3 p-1">
-              <Input placeholder="Your email address" />
-              <Button>Subscribe</Button>
+              <Input type="email" placeholder="Your email address" />
+              <Button type="primary">Subscribe</Button>
             </div>
           </div>
         </div>
@@ -59,4 +59,4 @@ const Footer = (props: Props) => {
   );
 };
 
-export default Footer;
+export default AppFooter;

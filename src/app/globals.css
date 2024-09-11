@@ -4,5 +4,37 @@
 @import '~antd/dist/reset.css';
 
 body {
-  background-color: cadetblue;
+  background-color: #17161a;
+}
+
+.home {
+  background-image: url('/assets/backgrounds/bg-1.png');
+}
+
+.ant-slider-rail {
+  background: gray !important;
+}
+
+.menu-item {
+  position: relative;
+}
+
+.menu-item a::after {
+  content: '';
+  position: absolute;
+  width: 20px;
+  height: 3px;
+  background-color: transparent;
+  bottom: -5px;
+  left: 0;
+  transition: all 0.3s ease;
+}
+
+.menu-item a.active {
+  color: #16eb14; /* The color for active link */
+}
+
+.menu-item a.active::after {
+  width: 50%;
+  background-color: #16eb14; /* The underline color for active */
 }

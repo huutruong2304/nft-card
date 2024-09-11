@@ -1,9 +1,11 @@
 import type { Metadata } from 'next';
 import './globals.css';
 import { APP_DESCRIPTION, APP_NAME } from '@/constants/appConfig';
-import Header from '@/components/Header';
-import Footer from '@/components/Footer';
 import { AntdRegistry } from '@ant-design/nextjs-registry';
+import AppHeader from '@/components/app-header';
+import AppFooter from '@/components/app-footer';
+import { ConfigProvider } from 'antd';
+import theme from '../../theme-config';
 
 export const metadata: Metadata = {
   title: APP_NAME,
@@ -18,13 +20,13 @@ export default function RootLayout({
   return (
     <html lang="en">
       <body>
-        <AntdRegistry>
-          <Header />
-          <div style={{ padding: '0 48px' }}>
-            <div>{children}</div>
-          </div>
-          <Footer />
-        </AntdRegistry>
+        <ConfigProvider theme={theme}>
+          <AntdRegistry>
+            <AppHeader />
+            <div className="min-h-screen">{children}</div>
+            <AppFooter />
+          </AntdRegistry>
+        </ConfigProvider>
       </body>
     </html>
   );
