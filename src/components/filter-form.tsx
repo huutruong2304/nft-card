@@ -190,13 +190,13 @@ const FilterForm = (props: Props) => {
         />
       </FormBox>
 
-      <div className="w-full flex justify-between py-2">
+      <div className="w-full flex flex-wrap justify-between py-2 gap-2">
         <Button size="middle" type="text" icon={<CloseCircleFilled style={{ color: 'yellow' }} />} onClick={handleResetFilter}>
           <span className="text-white px-0"> Reset filter</span>
         </Button>
 
         <Button size="middle" type="primary" onClick={handleSubmitParams}>
-          <span className="font-bold uppercase px-1">Search</span>
+          <span className="font-bold uppercase lg:px-1">Search</span>
         </Button>
       </div>
     </Form>

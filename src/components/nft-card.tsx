@@ -27,7 +27,7 @@ function getRandomGradient() {
 const NftCard = (props: Props) => {
   return (
     <div
-      className="text-white shadow-md p-2 h-max  rounded-xl cursor-pointer hover:scale-105 transition-all"
+      className="text-white shadow-md p-2 h-full  rounded-xl cursor-pointer hover:scale-105 transition-all"
       style={{ backgroundColor: 'rgba(50, 50, 50, 0.8)' }}
     >
       <div className="relative rounded-lg " style={{ background: getRandomGradient() }}>
