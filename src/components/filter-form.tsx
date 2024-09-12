@@ -78,6 +78,9 @@ const FilterForm = (props: Props) => {
 
   // update params to url
   const handleSearch = () => {
+    const params = new URLSearchParams(searchParams);
+    // need to remove page before searching
+    params.delete('page');
     replace(`${pathname}?${params.toString()}`);
   };
 

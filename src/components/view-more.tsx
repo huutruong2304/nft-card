@@ -12,8 +12,6 @@ const ViewMore = (props: Props) => {
 
   const handleLoadMore = () => {
     const currentPage = +(searchParams.get('page')?.toString() || '1');
-    console.log('🚀 ~ handleLoadMore ~ currentPage:', currentPage);
-
     const params = new URLSearchParams(searchParams);
     params.set('page', `${currentPage + 1}`);
     replace(`${pathname}?${params.toString()}`);

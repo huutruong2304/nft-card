@@ -14,7 +14,7 @@ export default function Skeleton() {
             </div>
             <div className="rounded-2xl overflow-hidden">
               {/* Placeholder for image */}
-              <div className="w-full h-72 bg-gray-700 animate-pulse"></div>
+              <div className="w-full h-40 bg-gray-700 animate-pulse"></div>
             </div>
           </div>
           <div className="my-2">
