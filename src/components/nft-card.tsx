@@ -10,6 +10,7 @@ type Props = {
   price: number;
   unit: string;
   sellerName: string;
+  sellerAvatar?: string;
 };
 
 function getRandomGradient() {
@@ -44,7 +45,7 @@ const NftCard = (props: Props) => {
           <div className="w-1/2">
             <h5 className="font-normal"> {props.name}</h5>
           </div>
-          <div className="w-1/2  flex gap-2 justify-end">
+          <div className="w-1/2  flex gap-2 justify-end items-center">
             <div>
               <Image src="/assets/icons/eth.png" alt="eth-unit" width={8} height={14} />
             </div>
@@ -55,7 +56,7 @@ const NftCard = (props: Props) => {
         </div>
 
         <div className="w-full flex py-1 items-center">
-          <Avatar size="default" icon={<UserOutlined />} rootClassName="bg-black" />
+          <Avatar size="default" src={props.sellerAvatar} icon={<UserOutlined />} rootClassName="bg-black" />
           <p className="m-0 ml-3 text-sm">{props.sellerName}</p>
         </div>
       </div>
