@@ -1,13 +1,25 @@
 'use client';
 import { SearchOutlined, CloseCircleFilled } from '@ant-design/icons';
 import { Form, Slider, Select, Button, SliderSingleProps, Input } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import FormBox from './form-box';
 import { usePathname, useRouter, useSearchParams } from 'next/navigation';
+import { ITier } from '@/types/types';
+import { TIER_LIST } from '@/constants/mock-data';
 
 const marks: SliderSingleProps['marks'] = {
-  0.01: '0.01',
-  200: '200',
+  0.01: {
+    style: {
+      color: 'white',
+    },
+    label: 0.01,
+  },
+  200: {
+    style: {
+      color: 'white',
+    },
+    label: 200,
+  },
 };
 
 type Props = {};
@@ -16,6 +28,7 @@ const MIN_PRICE = 0.01;
 const MAX_PRICE = 200;
 
 const FilterForm = (props: Props) => {
+  const tierList: ITier[] = [{ value: '0', label: 'All' }, ...TIER_LIST];
   const searchParams = useSearchParams();
   const pathname = usePathname();
   const { replace } = useRouter();
@@ -28,6 +41,16 @@ const FilterForm = (props: Props) => {
   const [price, setPrice] = useState(getDefaultSelectValue('price') as string);
 
   const [params, setParams] = useState('');
+
+  useEffect(() => {
+    const timer = setInterval(() => {
+      handleSubmitParams();
+    }, 60000);
+
+    return () => {
+      clearInterval(timer);
+    };
+  }, [params]);
 
   const handleSearchChange = (term: string): void => {
     const params = new URLSearchParams(searchParams);
@@ -77,11 +100,11 @@ const FilterForm = (props: Props) => {
   };
 
   // update params to url
-  const handleSearch = () => {
-    const params = new URLSearchParams(searchParams);
+  const handleSubmitParams = () => {
     // need to remove page before searching
-    params.delete('page');
-    replace(`${pathname}?${params.toString()}`);
+    const newParams = new URLSearchParams(params);
+    newParams.delete('page');
+    replace(`${pathname}?${newParams.toString()}`);
   };
 
   // remove all params
@@ -125,15 +148,7 @@ const FilterForm = (props: Props) => {
       </FormBox>
 
       <FormBox label="Tier">
-        <Select
-          className="w-full "
-          value={tier}
-          options={[
-            { value: '0', label: 'All' },
-            { value: '1', label: 'Icon' },
-          ]}
-          onChange={(value) => handleSelectChange(value, 'tier')}
-        />
+        <Select className="w-full " value={tier} options={tierList} onChange={(value) => handleSelectChange(value, 'tier')} />
       </FormBox>
 
       {/* <FormBox label="Theme">
@@ -176,12 +191,12 @@ const FilterForm = (props: Props) => {
       </FormBox>
 
       <div className="w-full flex justify-between py-2">
-        <Button type="text" icon={<CloseCircleFilled style={{ color: 'yellow' }} />} onClick={handleResetFilter}>
-          <span className="text-white"> Reset filter</span>
+        <Button size="middle" type="text" icon={<CloseCircleFilled style={{ color: 'yellow' }} />} onClick={handleResetFilter}>
+          <span className="text-white px-0"> Reset filter</span>
         </Button>
 
-        <Button size="middle" type="primary" onClick={handleSearch}>
-          <span className="font-bold uppercase px-2">Search</span>
+        <Button size="middle" type="primary" onClick={handleSubmitParams}>
+          <span className="font-bold uppercase px-1">Search</span>
         </Button>
       </div>
     </Form>

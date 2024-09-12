@@ -5,7 +5,6 @@ import { ISearchParams } from '@/types/types';
 
 type Props = {
   searchParams?: ISearchParams;
-  cardList?: any[];
 };
 
 const GridCard = async (props: Props) => {
@@ -18,12 +17,13 @@ const GridCard = async (props: Props) => {
     time: props?.searchParams?.time,
     minPrice: props?.searchParams?.minPrice,
     maxPrice: props?.searchParams?.maxPrice,
+    tier: props?.searchParams?.tier,
   });
-  return (
+  return cardList?.length ? (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
-      {cardList.map((item, index) => (
+      {cardList.map((item) => (
         <NftCard
-          key={index}
+          key={item.id}
           name={item.name}
           image={item.image}
           tier={item.tier}
@@ -34,6 +34,8 @@ const GridCard = async (props: Props) => {
         />
       ))}
     </div>
+  ) : (
+    <h5 className="text-white">No card available!</h5>
   );
 };
 

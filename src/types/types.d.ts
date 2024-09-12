@@ -9,6 +9,11 @@ export interface ISeller {
   avatar?: string;
 }
 
+export interface ITier {
+  value: string;
+  label: string;
+}
+
 export interface ICharacterStatistics {
   birthday: string;
   hometown: string;
@@ -27,7 +32,7 @@ export interface ICard {
   name: string;
   price: number;
   unit: string;
-  tier: string;
+  tier: ITier;
   image: string;
   theme?: string;
   tags?: string;
@@ -55,4 +60,5 @@ export interface IPaginationParams {
   price?: string;
   minPrice?: string;
   maxPrice?: string;
+  tier?: string;
 }

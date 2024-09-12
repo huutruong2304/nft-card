@@ -24,3 +24,5 @@ export const APP_FOOTER_NAVIGATION: ILinkItem[] = [
   { id: '/roadmap', label: 'RoadMap' },
   { id: '/community', label: 'Community' },
 ];
+
+export const ITEM_PER_PAGE = 10;

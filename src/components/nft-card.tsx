@@ -1,3 +1,4 @@
+import { ITier } from '@/types/types';
 import { HeartFilled, UserOutlined } from '@ant-design/icons';
 import { Avatar } from 'antd';
 import Image from 'next/image';
@@ -6,7 +7,7 @@ import React from 'react';
 type Props = {
   name: string;
   image: string;
-  tier: string;
+  tier: ITier;
   price: number;
   unit: string;
   sellerName: string;
@@ -31,7 +32,7 @@ const NftCard = (props: Props) => {
     >
       <div className="relative rounded-lg " style={{ background: getRandomGradient() }}>
         <div className="absolute left-2 top-2 px-3 py-1 rounded-md text-sm" style={{ backgroundColor: 'rgba(0,0,0,0.3)' }}>
-          {props.tier}
+          {props.tier.label}
         </div>
         <div className="absolute top-1 right-0 px-3 py-2">
           <HeartFilled />

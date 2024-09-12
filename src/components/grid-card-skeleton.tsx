@@ -1,7 +1,7 @@
-export default function Skeleton() {
+export default function GridCardSkeleton({ total }: { total: number }) {
   return (
     <div className="w-full grid grid-cols-2 lg:grid-cols-4 gap-6">
-      {[...Array(10)].map((movie, index) => (
+      {[...Array(total)].map((_, index) => (
         <div key={index} className="text-white shadow-md p-2 h-max rounded-xl cursor-pointer hover:scale-105 transition-all bg-gray-800">
           <div className="relative rounded-lg bg-gradient-to-r from-gray-700 to-gray-900 animate-pulse">
             <div className="absolute left-2 top-2 px-3 py-1 rounded-md bg-gray-600 text-transparent">

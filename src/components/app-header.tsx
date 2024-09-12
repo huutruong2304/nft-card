@@ -38,7 +38,7 @@ const AppHeader = () => {
           </ul>
         </nav>
         <div className="flex gap-3">
-          <Button>Connect Wallet</Button>
+          <Button type="primary">Connect Wallet</Button>
           <Dropdown menu={{ items }} trigger={['click']} className="cursor-pointer">
             <Space>
               <GlobalOutlined />

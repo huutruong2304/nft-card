@@ -1,4 +1,4 @@
-import { ICard, ISeller, ICharacterStatistics, IPaginationParams } from '@/types/types';
+import { ICard, ISeller, ICharacterStatistics, IPaginationParams, ITier } from '@/types/types';
 
 // Your existing seller list
 export const SELLER_LIST: ISeller[] = [
@@ -11,7 +11,12 @@ export const SELLER_LIST: ISeller[] = [
 const CARD_NAMES = ['Luffy', 'Brook', 'Garp', 'Nami', 'Nico Robin', 'Sanji', 'Usopp', 'Zoro'];
 
 // Example tiers for cards
-const TIERS = ['Common', 'Rare', 'Epic', 'Legendary'];
+export const TIER_LIST: ITier[] = [
+  { value: '1', label: 'Common' },
+  { value: '2', label: 'Rare' },
+  { value: '3', label: 'Epic' },
+  { value: '4', label: 'Legendary' },
+];
 
 // Example statistics for characters
 const STATISTICS_EXAMPLES: Partial<ICharacterStatistics>[] = [
@@ -62,7 +67,7 @@ function getRandomDay(): string {
 const createCard = (id: number, index: number): ICard => {
   const sellerIndex = index % SELLER_LIST.length;
   const cardNameIndex = index % CARD_NAMES.length;
-  const tierIndex = index % TIERS.length;
+  const tierIndex = index % TIER_LIST.length;
   const statisticsIndex = index % STATISTICS_EXAMPLES.length;
 
   return {
@@ -70,7 +75,7 @@ const createCard = (id: number, index: number): ICard => {
     name: CARD_NAMES[cardNameIndex],
     price: +(+Math.floor(Math.random() * (50 - 10 + 1)) + 10 + cardNameIndex).toFixed(2), // Vary price based on the card name index for uniqueness
     unit: 'ETH',
-    tier: TIERS[tierIndex],
+    tier: TIER_LIST[tierIndex],
     image: `/assets/cards/${CARD_NAMES[cardNameIndex].toLowerCase().replace(/\s+/g, '-')}.png`,
     seller: SELLER_LIST[sellerIndex],
     statistics: STATISTICS_EXAMPLES[statisticsIndex],
@@ -92,7 +97,7 @@ export const CARD_LIST = generateCards(200);
 
 // Function to simulate an API call with a random delay
 export const fetchCardListWithPagination = (params: IPaginationParams): Promise<ICard[]> => {
-  const { page, itemsPerPage, search, price, time, minPrice, maxPrice } = params;
+  const { page, itemsPerPage, search, price, time, minPrice, maxPrice, tier } = params;
   return new Promise((resolve) => {
     const randomDelay = Math.floor(Math.random() * (5000 - 1000 + 1)) + 1000; // Random delay between 1 to 5 seconds
 
@@ -106,6 +111,10 @@ export const fetchCardListWithPagination = (params: IPaginationParams): Promise<
       if (search) {
         const formatSearch = search.trim().toLowerCase();
         paginatedCards = paginatedCards.filter((card) => card.name.toLowerCase().includes(formatSearch));
+      }
+
+      if (tier) {
+        paginatedCards = paginatedCards.filter((card) => card.tier.value === tier);
       }
 
       if (minPrice && maxPrice) {
@@ -129,7 +138,7 @@ export const fetchCardListWithPagination = (params: IPaginationParams): Promise<
       }
 
       paginatedCards = paginatedCards.slice(0, endIndex);
-      console.table(paginatedCards);
+      // console.table(paginatedCards);
 
       resolve(paginatedCards);
     }, randomDelay);
